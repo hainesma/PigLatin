@@ -6,36 +6,39 @@ namespace PigLatin
     {
         static void Main(string[] args)
         {
-            string word = GetUserInput();
-            Console.WriteLine(word);
+            bool goOn = true;
+            while (goOn == true)
+            {
 
-            string piggified = Translate(word);
-            Console.WriteLine(piggified);
+                string word = GetUserInput();
+                Console.WriteLine(word);
 
+                string piggified = Translate(word);
+                Console.WriteLine(piggified);
+
+                goOn = GetContinue();
+            }
         }
 
         public static string GetUserInput()
         {
             Console.WriteLine("Please enter a word.");
             string input = Console.ReadLine();
-            return input;
+            string output = input.ToLower();
+            return output;
         }
 
-        public static string Translate(string input)
+        public static string Translate(string output)
         {
-            
-
-            int firstA = input.IndexOf('a');
-            int firstE = input.IndexOf('e');
-            int firstI = input.IndexOf('i');
-            int firstO = input.IndexOf('o');
-            int firstU = input.IndexOf('u');
-
-            Console.WriteLine(firstA);
+            int firstA = output.IndexOf('a');
+            int firstE = output.IndexOf('e');
+            int firstI = output.IndexOf('i');
+            int firstO = output.IndexOf('o');
+            int firstU = output.IndexOf('u');
 
             int[] vowelLocations = { firstA, firstE, firstI, firstO, firstU };
 
-            int firstVowelLocation = firstA;
+            int firstVowelLocation = 10;
             Console.WriteLine(firstVowelLocation);
 
             foreach (int vowelLocation in vowelLocations)
@@ -52,22 +55,40 @@ namespace PigLatin
 
             Console.WriteLine(firstVowelLocation);
 
-            string translated = "initial";
+            string translated = "";
             if (firstVowelLocation == 0)
             {
-                translated = input + "way";
+                translated = output + "way";
             } else
             {
-                string[] splits = input.Split(input[firstVowelLocation]);
+                string[] splits = output.Split(output[firstVowelLocation]);
                 foreach(string split in splits)
                 {
                     Console.WriteLine(split);
                 }
                 
-                translated = input[firstVowelLocation] + splits[1] + splits[0] + "ay";
+                translated = output[firstVowelLocation] + splits[1] + splits[0] + "ay";
             }
 
             return translated;
+        }
+
+        public static bool GetContinue()
+        {
+            Console.WriteLine("Would you like to translate another word? (Y/N)");
+            string input = Console.ReadLine();
+            if(input.ToLower() == "y")
+            {
+                return true;
+            } 
+            else if(input.ToLower() == "n")
+            {
+                return false;
+            } else
+            {
+                Console.WriteLine("I don't understand that input. Please try again.");
+                return GetContinue();
+            }
         }
     }
 }
