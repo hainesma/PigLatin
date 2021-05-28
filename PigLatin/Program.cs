@@ -16,6 +16,14 @@ namespace PigLatin
                 string piggified = Translate(word);
                 Console.WriteLine(piggified);
 
+                string matchedCase = MatchCase(word, piggified);
+                Console.WriteLine(matchedCase);
+                Console.WriteLine(matchedCase.GetType());
+                foreach(char m in matchedCase)
+                {
+                    Console.WriteLine(m);
+                }
+
                 goOn = GetContinue();
             }
         }
@@ -24,12 +32,13 @@ namespace PigLatin
         {
             Console.WriteLine("Please enter a word.");
             string input = Console.ReadLine();
-            string output = input.ToLower();
-            return output;
+            return input;
         }
 
-        public static string Translate(string output)
+        public static string Translate(string input)
         {
+            string output = input.ToLower();
+            
             int firstA = output.IndexOf('a');
             int firstE = output.IndexOf('e');
             int firstI = output.IndexOf('i');
@@ -67,6 +76,42 @@ namespace PigLatin
                 translated = secondHalf + firstHalf + "ay";
             }
             return translated;
+        }
+
+
+        //public static string MatchCase(string original, string translated)
+        //{
+        //    for (int i=0; i <= original.Length -1; i++)
+        //    {
+        //        bool result = Char.IsUpper(original, i);
+
+        //        string properCase = translated;
+
+        //        if (result == true)
+        //        {
+        //             properCase = translated[i].to;
+        //        }
+        //    }
+        //}
+
+        public static string MatchCase(string original, string translated)
+        {
+            char[] originalLetters = original.ToCharArray();
+            char[] translatedLetters = translated.ToCharArray();
+
+            for (int i = 0; i <= original.Length - 1; i++)
+            {
+                bool upperCheck = Char.IsUpper(originalLetters[i]);
+
+                if (upperCheck == true)
+                {
+                    translatedLetters[i] = Char.ToUpper(translatedLetters[i]);
+                }
+            }
+
+            string output = translatedLetters.ToString();
+
+            return output;
         }
 
         public static bool GetContinue()
