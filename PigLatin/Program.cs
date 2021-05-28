@@ -77,22 +77,28 @@ namespace PigLatin
         {
             char[] originalLetters = original.ToCharArray();
             char[] translatedLetters = translated.ToCharArray();
+            string output = string.Empty;
 
             if ( Char.IsUpper(originalLetters[0]) == true && Char.IsUpper(originalLetters[1]) == true )
             {
-                for(int i = 0; i < original.Length + 2; i++)
+                string upperOutput = string.Empty;
+                foreach( char t in translatedLetters )
                 {
-                    translatedLetters[i] = Char.ToUpper(translatedLetters[i]);
+                    char upperLetter =  Char.ToUpper(t);
+                    upperOutput += upperLetter;
+
                 }
+                output = upperOutput;
             } 
             else if ( Char.IsUpper(originalLetters[0]) == true && Char.IsUpper(originalLetters[1]) == false )
             {
                 translatedLetters[0] = Char.ToUpper(translatedLetters[0]);
+                output = new string(translatedLetters);
             }
             
             
             // This is the way to make a char array into a string
-            string output = new string(translatedLetters);
+            
 
             return output;
         }
