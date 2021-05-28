@@ -18,11 +18,6 @@ namespace PigLatin
 
                 string matchedCase = MatchCase(word, piggified);
                 Console.WriteLine(matchedCase);
-                Console.WriteLine(matchedCase.GetType());
-                foreach(char m in matchedCase)
-                {
-                    Console.WriteLine(m);
-                }
 
                 goOn = GetContinue();
             }
@@ -78,22 +73,6 @@ namespace PigLatin
             return translated;
         }
 
-
-        //public static string MatchCase(string original, string translated)
-        //{
-        //    for (int i=0; i <= original.Length -1; i++)
-        //    {
-        //        bool result = Char.IsUpper(original, i);
-
-        //        string properCase = translated;
-
-        //        if (result == true)
-        //        {
-        //             properCase = translated[i].to;
-        //        }
-        //    }
-        //}
-
         public static string MatchCase(string original, string translated)
         {
             char[] originalLetters = original.ToCharArray();
@@ -109,7 +88,7 @@ namespace PigLatin
                 }
             }
 
-            string output = translatedLetters.ToString();
+            string output = new string(translatedLetters);
 
             return output;
         }
