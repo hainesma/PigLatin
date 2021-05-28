@@ -59,17 +59,13 @@ namespace PigLatin
             if (firstVowelLocation == 0)
             {
                 translated = output + "way";
-            } else
+            } 
+            else
             {
-                string[] splits = output.Split(output[firstVowelLocation]);
-                foreach(string split in splits)
-                {
-                    Console.WriteLine(split);
-                }
-                
-                translated = output[firstVowelLocation] + splits[1] + splits[0] + "ay";
+                string firstHalf = output.Substring(0, firstVowelLocation);
+                string secondHalf = output.Substring(firstVowelLocation, output.Length - firstVowelLocation);
+                translated = secondHalf + firstHalf + "ay";
             }
-
             return translated;
         }
 
